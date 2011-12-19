@@ -34,15 +34,19 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.util.AnnotationLiteral;
+import javax.xml.namespace.QName;
 
 import org.switchyard.Exchange;
 import org.switchyard.ExchangeHandler;
 import org.switchyard.ExchangeState;
+import org.switchyard.ServiceDomain;
 import org.switchyard.ServiceReference;
 import org.switchyard.SynchronousInOutHandler;
 import org.switchyard.component.bean.deploy.BeanDeploymentMetaData;
+import org.switchyard.config.model.switchyard.SwitchYardModel;
 import org.switchyard.metadata.BaseExchangeContract;
 import org.switchyard.metadata.InvocationContract;
 import org.switchyard.metadata.ServiceOperation;
@@ -85,6 +89,8 @@ public class ClientProxyBean implements Bean {
      */
     private Object _proxyBean;
 
+    private BeanManager _beanManager;
+    
     /**
      * Public constructor.
      *
@@ -96,6 +102,7 @@ public class ClientProxyBean implements Bean {
     public ClientProxyBean(String serviceName, Class<?> proxyInterface, Set<Annotation> qualifiers, BeanDeploymentMetaData beanDeploymentMetaData) {
         this._serviceName = serviceName;
         this._serviceInterface = proxyInterface;
+        this._beanManager = beanDeploymentMetaData.getBeanManager();
 
         if (qualifiers != null) {
             this._qualifiers = qualifiers;
@@ -245,6 +252,20 @@ public class ClientProxyBean implements Bean {
      * @return the contextual instance
      */
     public Object create(CreationalContext creationalContext) {
+        if (_service == null) {
+            SwitchYardModel model = null;
+            ServiceDomain domain = null;
+            Set<Bean<?>> beans = _beanManager.getBeans(SwitchYardModel.class);
+            if (!beans.isEmpty()) {
+                model = (SwitchYardModel)_beanManager.getReference(beans.iterator().next(), SwitchYardModel.class, creationalContext);
+            }
+            beans = _beanManager.getBeans(ServiceDomain.class);
+            if (!beans.isEmpty()) {
+                domain = (ServiceDomain)_beanManager.getReference(beans.iterator().next(), ServiceDomain.class, creationalContext);
+            }
+            QName qualifiedServiceName = new QName(model.getComposite().getTargetNamespace(), _serviceName);
+            _service = domain.getService(qualifiedServiceName);
+        }
         return _proxyBean;
     }
 
