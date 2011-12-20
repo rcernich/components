@@ -38,6 +38,7 @@ import org.switchyard.Exchange;
 import org.switchyard.ExchangeHandler;
 import org.switchyard.ServiceReference;
 import org.switchyard.common.lang.Strings;
+import org.switchyard.component.camel.composer.CamelComposition;
 import org.switchyard.component.camel.config.model.CamelBindingModel;
 import org.switchyard.component.camel.config.model.OperationSelector;
 import org.switchyard.component.camel.transaction.TransactionManagerFactory;
@@ -95,10 +96,13 @@ public class InboundHandler implements ExchangeHandler {
                 addToCamelRegistry(tm, tmName);
             }
             // Tell Camel the route is transacted
-            route.transacted(TRANSACTED_REF).to(composeSwitchYardComponentName(serviceName));
-        } else {
-            route.to(composeSwitchYardComponentName(serviceName));
+            route.transacted(TRANSACTED_REF);
         }
+        // TODO: will this cause problems if there are multiple references to the URI (i.e. could we be overwriting the message composer)?
+        final SwitchyardEndpoint endpoint = _camelContext.getEndpoint(composeSwitchYardComponentName(serviceName),
+                SwitchyardEndpoint.class);
+        endpoint.setMessageComposer(CamelComposition.getMessageComposer(_camelBindingModel));
+        route.to(endpoint);
         
         return route;
     }
