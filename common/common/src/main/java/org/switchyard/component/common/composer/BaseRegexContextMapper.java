@@ -14,6 +14,7 @@
 package org.switchyard.component.common.composer;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -21,8 +22,11 @@ import java.util.regex.PatternSyntaxException;
 
 import javax.xml.namespace.QName;
 
+import org.switchyard.Context;
+import org.switchyard.Property;
 import org.switchyard.common.lang.Strings;
 import org.switchyard.common.xml.XMLHelper;
+import org.switchyard.label.Label;
 
 /**
  * Base class for RegexContextMapper; adds the regex pattern matching ability.
@@ -133,6 +137,57 @@ public class BaseRegexContextMapper<D extends BindingData> extends BaseContextMa
             matches = green || !red;
         }
         return matches;
+    }
+
+    /**
+     * Add the properties to the context.
+     * 
+     * @param context the context to which the properties should be added.
+     * @param properties the properties to add.
+     * @param defaultLabels the default set of labels to add to all properties.
+     */
+    protected void applyStaticProperties(Context context, List<Property> properties, String[] defaultLabels) {
+        if (context == null || properties == null || properties.size() == 0) {
+            return;
+        }
+        for (Property property : properties) {
+            // TODO: should we be filtering these, even if the user specified them manually?
+            if (matches(property.getName()) && context.getProperty(property.getName(), property.getScope()) == null) {
+                final Set<String> labels = loadLabels(property);
+                final Property staticProperty = context.setProperty(property.getName(), property.getValue(), property.getScope());
+                if (labels != null) {
+                    staticProperty.addLabels(labels);
+                }
+                // TODO: should we only add defaults if labels are null? 
+                if (defaultLabels != null) {
+                    staticProperty.addLabels(defaultLabels);
+                }
+            }
+        }
+    }
+
+    private Set<String> loadLabels(Property property) {
+        final Set<String> rawLabels = property.getLabels();
+        if (rawLabels == null || rawLabels.size() == 0) {
+            return null;
+        }
+        final Set<String> convertedLabels = new HashSet<String>();
+        for (String rawLabel : rawLabels) {
+            rawLabel = Strings.trimToNull(rawLabel);
+            if (rawLabel == null) {
+                continue;
+            }
+            final String[] typeAndName = rawLabel.split(".");
+            if (typeAndName.length == 2) {
+                convertedLabels.add(Label.Util.toSwitchYardLabel(typeAndName[0], typeAndName[1]));
+            } else {
+                // TODO: log warning?
+                if (typeAndName.length > 2) {
+                    convertedLabels.add(rawLabel);
+                }
+            }
+        }
+        return convertedLabels.size() == 0 ? null : convertedLabels;
     }
 
 }

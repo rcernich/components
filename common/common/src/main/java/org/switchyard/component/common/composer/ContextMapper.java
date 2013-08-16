@@ -13,7 +13,10 @@
  */
 package org.switchyard.component.common.composer;
 
+import java.util.List;
+
 import org.switchyard.Context;
+import org.switchyard.Property;
 import org.switchyard.config.model.composer.ContextMapperModel;
 
 /**
@@ -52,5 +55,20 @@ public interface ContextMapper<D extends BindingData> {
      * @throws Exception if there was a problem
      */
     public void mapTo(Context context, D target) throws Exception;
+
+    /**
+     * @return statically declared properties targeted for "in" messages.
+     */
+    public List<Property> getStaticInMessageProperties();
+
+    /**
+     * @return statically declared properties targeted for "out" messages.
+     */
+    public List<Property> getStaticOutMessageProperties();
+
+    /**
+     * @return statically declared properties targeted for the exchange context.
+     */
+    public List<Property> getStaticExchangeProperties();
 
 }

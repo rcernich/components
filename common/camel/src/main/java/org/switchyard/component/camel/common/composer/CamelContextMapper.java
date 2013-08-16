@@ -65,6 +65,7 @@ public class CamelContextMapper extends BaseRegexContextMapper<CamelBindingData>
         Message message = source.getMessage();
         Exchange exchange = message.getExchange();
 
+        applyStaticProperties(context, getStaticInMessageProperties(), getCamelLabels());
         for (Map.Entry<String,Object> header : message.getHeaders().entrySet()) {
             String name = header.getKey();
             if (matches(name) && !ContextPropertyUtil.isReservedProperty(name, Scope.MESSAGE)) {
@@ -75,6 +76,7 @@ public class CamelContextMapper extends BaseRegexContextMapper<CamelBindingData>
             }
         }
         if (exchange != null) {
+            applyStaticProperties(context, getStaticExchangeProperties(), getCamelLabels());
             for (Map.Entry<String,Object> property : exchange.getProperties().entrySet()) {
                 String name = property.getKey();
                 if (matches(name) && !ContextPropertyUtil.isReservedProperty(name, Scope.EXCHANGE)) {
@@ -95,6 +97,7 @@ public class CamelContextMapper extends BaseRegexContextMapper<CamelBindingData>
         Message message = target.getMessage();
         Exchange exchange = message.getExchange();
 
+        applyStaticProperties(context, getStaticOutMessageProperties(), getCamelLabels());
         for (Property property : context.getProperties(Scope.MESSAGE)) {
             String name = property.getName();
             if (matches(name) && !ContextPropertyUtil.isReservedProperty(name, Scope.MESSAGE)) {
@@ -105,6 +108,7 @@ public class CamelContextMapper extends BaseRegexContextMapper<CamelBindingData>
             }
         }
         if (exchange != null) {
+            applyStaticProperties(context, getStaticExchangeProperties(), getCamelLabels());
             for (Property property : context.getProperties(Scope.EXCHANGE)) {
                 String name = property.getName();
                 if (matches(name) && !ContextPropertyUtil.isReservedProperty(name, Scope.EXCHANGE)) {
