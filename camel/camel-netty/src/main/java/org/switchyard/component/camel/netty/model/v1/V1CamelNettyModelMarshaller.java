@@ -17,6 +17,7 @@ import static org.switchyard.component.camel.netty.model.Constants.NETTY_NAMESPA
 
 import org.switchyard.component.camel.common.marshaller.BaseModelMarshaller;
 import org.switchyard.component.camel.common.marshaller.ModelCreator;
+import org.switchyard.component.camel.netty.model.Constants;
 import org.switchyard.config.Configuration;
 import org.switchyard.config.model.Descriptor;
 
@@ -40,6 +41,19 @@ public class V1CamelNettyModelMarshaller extends BaseModelMarshaller {
             }
         });
         registerBinding(V1CamelNettyUdpBindingModel.UDP, new ModelCreator<V1CamelNettyUdpBindingModel>() {
+            @Override
+            public V1CamelNettyUdpBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelNettyUdpBindingModel(config, descriptor);
+            }
+        });
+
+        registerBinding(Constants.NETTY_NAMESPACE_V1_0, V1CamelNettyTcpBindingModel.TCP, new ModelCreator<V1CamelNettyTcpBindingModel>() {
+            @Override
+            public V1CamelNettyTcpBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelNettyTcpBindingModel(config, descriptor);
+            }
+        });
+        registerBinding(Constants.NETTY_NAMESPACE_V1_0, V1CamelNettyUdpBindingModel.UDP, new ModelCreator<V1CamelNettyUdpBindingModel>() {
             @Override
             public V1CamelNettyUdpBindingModel create(Configuration config, Descriptor descriptor) {
                 return new V1CamelNettyUdpBindingModel(config, descriptor);

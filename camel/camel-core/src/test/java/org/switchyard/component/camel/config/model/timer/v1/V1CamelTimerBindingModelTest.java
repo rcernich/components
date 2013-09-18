@@ -22,6 +22,7 @@ import java.util.Date;
 
 import org.apache.camel.component.timer.TimerEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.core.model.Constants;
 import org.switchyard.component.camel.core.model.timer.v1.V1CamelTimerBindingModel;
 import org.switchyard.component.camel.core.model.v1.V1CamelBindingModel;
 
@@ -46,10 +47,15 @@ public class V1CamelTimerBindingModelTest extends V1BaseCamelServiceBindingModel
         "period=555&delay=100&fixedRate=true&daemon=false";
 
     private Date referenceDate;
+    private final String _namespaceUri;
 
     public V1CamelTimerBindingModelTest() throws ParseException {
-        super(TimerEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.CORE_NAMESPACE_V1);
+    }
 
+    protected V1CamelTimerBindingModelTest(String testConfigPath, String namespaceUri) throws ParseException {
+        super(TimerEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
         referenceDate = new SimpleDateFormat(PATTERN).parse("2011-01-01T12:00:00");
     }
 
@@ -66,7 +72,7 @@ public class V1CamelTimerBindingModelTest extends V1BaseCamelServiceBindingModel
 
     @Override
     protected V1CamelTimerBindingModel createTestModel() {
-        return new V1CamelTimerBindingModel().setTimerName(NAME)
+        return new V1CamelTimerBindingModel(_namespaceUri).setTimerName(NAME)
             .setTime(referenceDate)
             .setPattern(PATTERN)
             .setPeriod(PERIOD)

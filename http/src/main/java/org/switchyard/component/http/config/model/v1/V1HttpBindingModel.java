@@ -61,7 +61,16 @@ public class V1HttpBindingModel extends V1BindingModel implements HttpBindingMod
      * Constructor.
      */
     public V1HttpBindingModel() {
-        super(HTTP, DEFAULT_NAMESPACE);
+        this(DEFAULT_NAMESPACE);
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param namespace the namespace for this binding
+     */
+    public V1HttpBindingModel(String namespace) {
+        super(HTTP, namespace);
         setModelChildrenOrder(MODEL_CHILDREN_ORDER);
     }
 

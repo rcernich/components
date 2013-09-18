@@ -18,6 +18,7 @@ import static junit.framework.Assert.assertEquals;
 import org.apache.camel.component.jpa.JpaEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelReferenceBindingModelTest;
 import org.switchyard.component.camel.jpa.model.CamelJpaProducerBindingModel;
+import org.switchyard.component.camel.jpa.model.Constants;
 
 /**
  * Test for {@link V1CamelJpaProducerBindingModel}.
@@ -33,19 +34,25 @@ public class V1CamelJpaProducerBindingModelTest extends V1BaseCamelReferenceBind
     private static final Boolean FLUSH_ON_SEND = false;
     private static final Boolean USE_PERSIST = false;
 
-    public V1CamelJpaProducerBindingModelTest() {
-        super(JpaEndpoint.class, CAMEL_XML);
+    private final String _namespaceUri;
 
+    public V1CamelJpaProducerBindingModelTest() {
+        this(CAMEL_XML, Constants.JPA_NAMESPACE_V1);
+    }
+
+    protected V1CamelJpaProducerBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(JpaEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
         setSkipCamelEndpointTesting(true);
     }
 
     @Override
     protected V1CamelJpaBindingModel createTestModel() {
-        V1CamelJpaBindingModel model = new V1CamelJpaBindingModel();
+        V1CamelJpaBindingModel model = new V1CamelJpaBindingModel(_namespaceUri);
         model.setEntityClassName(V1CamelJpaBindingModelTest.ENTITY_CLASS_NAME);
         model.setPersistenceUnit(V1CamelJpaBindingModelTest.PERSISTENCE_UNIT);
 
-        CamelJpaProducerBindingModel producer = new V1CamelJpaProducerBindingModel()
+        CamelJpaProducerBindingModel producer = new V1CamelJpaProducerBindingModel(_namespaceUri)
             .setFlushOnSend(FLUSH_ON_SEND)
             .setUsePersist(USE_PERSIST);
         return model.setProducer(producer);

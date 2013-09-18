@@ -49,7 +49,16 @@ public class V1CamelSqlBindingModel extends V1BaseCamelBindingModel
      * Create a new CamelSqlBindingModel.
      */
     public V1CamelSqlBindingModel() {
-        super(SQL, SQL_NAMESPACE_V1);
+        this(SQL_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new CamelSqlBindingModel.
+     * 
+     * @param namespace the namespace for this binding
+     */
+    public V1CamelSqlBindingModel(String namespace) {
+        super(SQL, namespace);
 
         setModelChildrenOrder(QUERY, DATA_SOURCE_REF, BATCH, PLACEHOLDER);
     }

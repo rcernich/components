@@ -15,7 +15,7 @@
 <switchyard xmlns="urn:switchyard-config:switchyard:1.0">
     <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="RulesModelTests" targetNamespace="urn:rules:test:1.0">
         <component name="DoStuffRules">
-            <implementation.rules xmlns="urn:switchyard-component-rules:config:1.0">
+            <implementation.rules xmlns="urn:switchyard-component-rules:config:1.1">
                 <channels>
                     <channel class="org.switchyard.component.rules.config.model.RulesModelTests$TestChannel" name="theName" operation="theOperation" reference="theReference"/>
                 </channels>

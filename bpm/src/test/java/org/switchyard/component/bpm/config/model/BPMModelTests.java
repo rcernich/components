@@ -72,6 +72,7 @@ public class BPMModelTests {
 
     private static final String CONTAINER_XML = "/org/switchyard/component/bpm/config/model/BPMModelTests-Container.xml";
     private static final String RESOURCES_XML = "/org/switchyard/component/bpm/config/model/BPMModelTests-Resources.xml";
+    private static final String RESOURCES_1_0_XML = "/org/switchyard/component/bpm/config/model/BPMModelTests-Resources-1.0.xml";
 
     private ModelPuller<SwitchYardModel> _puller;
 
@@ -211,6 +212,11 @@ public class BPMModelTests {
     @Test
     public void testValidateResources() throws Exception {
         doTestValidate(RESOURCES_XML);
+    }
+
+    @Test
+    public void testValidateResources_1_0() throws Exception {
+        doTestValidate(RESOURCES_1_0_XML);
     }
 
     private void doTestValidate(String xml) throws Exception {

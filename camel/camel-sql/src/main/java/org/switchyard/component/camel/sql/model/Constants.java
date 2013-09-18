@@ -19,8 +19,13 @@ package org.switchyard.component.camel.sql.model;
 public interface Constants {
 
     /**
-     * Sql v1 namespace.
+     * Sql v1.1 namespace.
      */
-    String SQL_NAMESPACE_V1 = "urn:switchyard-component-camel-sql:config:1.0";
+    String SQL_NAMESPACE_V1 = "urn:switchyard-component-camel-sql:config:1.1";
+
+    /**
+     * Sql v1.0 namespace.
+     */
+    String SQL_NAMESPACE_V1_0 = "urn:switchyard-component-camel-sql:config:1.0";
 
 }

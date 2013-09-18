@@ -19,8 +19,13 @@ package org.switchyard.component.camel.jms.model;
 public interface Constants {
 
     /**
-     * Jms v1 namespace.
+     * Jms v1.1 namespace.
      */
-    String JMS_NAMESPACE_V1 = "urn:switchyard-component-camel-jms:config:1.0";
+    String JMS_NAMESPACE_V1 = "urn:switchyard-component-camel-jms:config:1.1";
+
+    /**
+     * Jms v1.0 namespace.
+     */
+    String JMS_NAMESPACE_V1_0 = "urn:switchyard-component-camel-jms:config:1.0";
 
 }

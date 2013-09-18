@@ -32,7 +32,16 @@ public class V1CamelFileConsumerBindingModel extends V1GenericFileConsumerBindin
      * Create a new V1CamelFileConsumerBindingModel.
      */
     public V1CamelFileConsumerBindingModel() {
-        super(V1CamelFileBindingModel.CONSUME, FILE_NAMESPACE_V1);
+        this(FILE_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new V1CamelFileConsumerBindingModel.
+     * 
+     * @param namespace the namespace for this consumer model
+     */
+    public V1CamelFileConsumerBindingModel(String namespace) {
+        super(V1CamelFileBindingModel.CONSUME, namespace);
     }
 
     /**

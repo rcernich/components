@@ -17,6 +17,7 @@ import static org.switchyard.component.camel.core.model.Constants.CORE_NAMESPACE
 
 import org.switchyard.component.camel.common.marshaller.BaseModelMarshaller;
 import org.switchyard.component.camel.common.marshaller.ModelCreator;
+import org.switchyard.component.camel.core.model.Constants;
 import org.switchyard.component.camel.core.model.direct.v1.V1CamelDirectBindingModel;
 import org.switchyard.component.camel.core.model.mock.v1.V1CamelMockBindingModel;
 import org.switchyard.component.camel.core.model.seda.v1.V1CamelSedaBindingModel;
@@ -66,6 +67,37 @@ public class V1CamelCoreModelMarshaller extends BaseModelMarshaller {
             }
         });
         registerBinding(V1CamelMockBindingModel.MOCK, new ModelCreator<V1CamelMockBindingModel>() {
+            @Override
+            public V1CamelMockBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelMockBindingModel(config, descriptor);
+            }
+        });
+        // 1.0 instances
+        registerBinding(Constants.CORE_NAMESPACE_V1_0, V1CamelBindingModel.URI, new ModelCreator<V1CamelBindingModel>() {
+            @Override
+            public V1CamelBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelBindingModel(config, descriptor);
+            }
+        });
+        registerBinding(Constants.CORE_NAMESPACE_V1_0, V1CamelDirectBindingModel.DIRECT, new ModelCreator<V1CamelDirectBindingModel>() {
+            @Override
+            public V1CamelDirectBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelDirectBindingModel(config, descriptor);
+            }
+        });
+        registerBinding(Constants.CORE_NAMESPACE_V1_0, V1CamelTimerBindingModel.TIMER, new ModelCreator<V1CamelTimerBindingModel>() {
+            @Override
+            public V1CamelTimerBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelTimerBindingModel(config, descriptor);
+            }
+        });
+        registerBinding(Constants.CORE_NAMESPACE_V1_0, V1CamelSedaBindingModel.SEDA, new ModelCreator<V1CamelSedaBindingModel>() {
+            @Override
+            public V1CamelSedaBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelSedaBindingModel(config, descriptor);
+            }
+        });
+        registerBinding(Constants.CORE_NAMESPACE_V1_0, V1CamelMockBindingModel.MOCK, new ModelCreator<V1CamelMockBindingModel>() {
             @Override
             public V1CamelMockBindingModel create(Configuration config, Descriptor descriptor) {
                 return new V1CamelMockBindingModel(config, descriptor);

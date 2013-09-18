@@ -38,7 +38,16 @@ public class V1CamelNettyUdpBindingModel extends V1CamelNettyBindingModel
      * Create a new CamelDirectBindingModel.
      */
     public V1CamelNettyUdpBindingModel() {
-        super(UDP, NETTY_NAMESPACE_V1);
+        this(NETTY_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new CamelDirectBindingModel.
+     * 
+     * @param namespace the namespace for this binding
+     */
+    public V1CamelNettyUdpBindingModel(String namespace) {
+        super(UDP, namespace);
 
         setModelChildrenOrder(BROADCAST);
     }

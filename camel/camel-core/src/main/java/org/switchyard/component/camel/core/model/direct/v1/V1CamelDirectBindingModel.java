@@ -42,7 +42,16 @@ public class V1CamelDirectBindingModel extends V1BaseCamelBindingModel
      * Create a new CamelDirectBindingModel.
      */
     public V1CamelDirectBindingModel() {
-        super(DIRECT, CORE_NAMESPACE_V1);
+        this(CORE_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new CamelDirectBindingModel.
+     * 
+     * @param namespace the namespace for this direct binding
+     */
+    public V1CamelDirectBindingModel(String namespace) {
+        super(DIRECT, namespace);
 
         setModelChildrenOrder(NAME);
     }

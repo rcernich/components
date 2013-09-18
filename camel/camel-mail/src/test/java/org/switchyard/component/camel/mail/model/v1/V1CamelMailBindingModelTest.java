@@ -17,6 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 import org.apache.camel.component.mail.MailEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.mail.model.Constants;
 
 /**
  * Test for {@link V1CamelMailBindingModel}.
@@ -34,8 +35,15 @@ public class V1CamelMailBindingModelTest extends V1BaseCamelServiceBindingModelT
     private static final String CAMEL_URI = "imaps://localhost:233?connectionTimeout=300&"
         + "password=rider&username=camel";
 
+    private final String _namespaceUri;
+
     public V1CamelMailBindingModelTest() {
-        super(MailEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.MAIL_NAMESPACE_V1);
+    }
+
+    protected V1CamelMailBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(MailEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Override
@@ -50,7 +58,7 @@ public class V1CamelMailBindingModelTest extends V1BaseCamelServiceBindingModelT
 
     @Override
     protected V1CamelMailBindingModel createTestModel() {
-        return new V1CamelMailBindingModel()
+        return new V1CamelMailBindingModel(_namespaceUri)
             .setSecure(SECURE)
             .setHost(HOST)
             .setPort(PORT)

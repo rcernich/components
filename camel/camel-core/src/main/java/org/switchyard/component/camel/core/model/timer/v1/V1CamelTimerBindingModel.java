@@ -57,7 +57,16 @@ public class V1CamelTimerBindingModel extends V1BaseCamelBindingModel
      * Create a new CamelTimerBindingModel.
      */
     public V1CamelTimerBindingModel() {
-        super(TIMER, CORE_NAMESPACE_V1);
+        this(CORE_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new CamelTimerBindingModel.
+     * 
+     * @param namespace the namespace for this timer binding
+     */
+    public V1CamelTimerBindingModel(String namespace) {
+        super(TIMER, namespace);
 
         setModelChildrenOrder(NAME, TIME, PATTERN, PERIOD, DELAY, FIXED_RATE, DAEMON);
     }

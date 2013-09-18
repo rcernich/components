@@ -40,6 +40,7 @@ import org.switchyard.config.model.switchyard.SwitchYardModel;
 public class BeanModelTests {
 
     private static final String COMPLETE_XML = "/org/switchyard/component/bean/config/model/BeanModelTests-Complete.xml";
+    private static final String COMPLETE_1_0_XML = "/org/switchyard/component/bean/config/model/BeanModelTests-Complete-1.0.xml";
 
     private ModelPuller<SwitchYardModel> _puller;
 
@@ -61,7 +62,7 @@ public class BeanModelTests {
         Configuration config = bci.getModelConfiguration();
         Assert.assertEquals("implementation.bean", config.getName());
         QName qname = config.getQName();
-        Assert.assertEquals("urn:switchyard-component-bean:config:1.0", qname.getNamespaceURI());
+        Assert.assertEquals("urn:switchyard-component-bean:config:1.1", qname.getNamespaceURI());
         Assert.assertEquals("implementation.bean", qname.getLocalPart());
     }
 
@@ -78,6 +79,12 @@ public class BeanModelTests {
     @Test
     public void testValidation() throws Exception {
         SwitchYardModel switchyard = _puller.pull(COMPLETE_XML, getClass());
+        switchyard.assertModelValid();
+    }
+
+    @Test
+    public void testValidation_1_0() throws Exception {
+        SwitchYardModel switchyard = _puller.pull(COMPLETE_1_0_XML, getClass());
         switchyard.assertModelValid();
     }
 

@@ -25,7 +25,12 @@ public interface RulesComponentImplementationModel extends KnowledgeComponentImp
     /**
      * The "rules" namespace.
      */
-    public static final String DEFAULT_NAMESPACE = "urn:switchyard-component-rules:config:1.0";
+    public static final String DEFAULT_NAMESPACE = "urn:switchyard-component-rules:config:1.1";
+
+    /**
+     * The 1.0 "rules" namespace.
+     */
+    public static final String NAMESPACE_1_0 = "urn:switchyard-component-rules:config:1.0";
 
     /**
      * The "rules" implementation type.

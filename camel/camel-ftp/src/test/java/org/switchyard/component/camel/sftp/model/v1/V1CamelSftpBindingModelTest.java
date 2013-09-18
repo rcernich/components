@@ -22,6 +22,7 @@ import org.apache.camel.component.file.remote.SftpEndpoint;
 import org.junit.Test;
 import org.switchyard.common.property.PropertyResolver;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.ftp.Constants;
 import org.switchyard.config.model.Validation;
 
 /**
@@ -43,8 +44,15 @@ public class V1CamelSftpBindingModelTest extends V1BaseCamelServiceBindingModelT
     private static final String CAMEL_URI = "sftp://localhost:9022/test?knownHostsFile=known_hosts"
         + "&privateKeyFile=my.key&privateKeyFilePassphrase=test&maxMessagesPerPoll=5";
 
+    private final String _namespaceUri;
+
     public V1CamelSftpBindingModelTest() {
-        super(SftpEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.FTP_NAMESPACE_V1);
+    }
+
+    protected V1CamelSftpBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(SftpEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Test
@@ -66,7 +74,7 @@ public class V1CamelSftpBindingModelTest extends V1BaseCamelServiceBindingModelT
 
     @Override
     protected V1CamelSftpBindingModel createTestModel() {
-        V1CamelSftpBindingModel model = (V1CamelSftpBindingModel) new V1CamelSftpBindingModel();
+        V1CamelSftpBindingModel model = (V1CamelSftpBindingModel) new V1CamelSftpBindingModel(_namespaceUri);
         model.getModelConfiguration().setPropertyResolver(new PropertyResolver() {
             @Override
             public Object resolveProperty(String key) {
@@ -76,7 +84,7 @@ public class V1CamelSftpBindingModelTest extends V1BaseCamelServiceBindingModelT
                 return null;
             }
         });
-        model.setAdditionalUriParameters(createAdditionalUriParametersModel(org.switchyard.component.camel.ftp.Constants.FTP_NAMESPACE_V1, Collections.singletonMap("maxMessagesPerPoll", "${maxMessagesPerPoll}")));
+        model.setAdditionalUriParameters(createAdditionalUriParametersModel(_namespaceUri, Collections.singletonMap("maxMessagesPerPoll", "${maxMessagesPerPoll}")));
         model.setDirectory(DIRECTORY)
             .setHost(HOST)
             .setPort(PORT);

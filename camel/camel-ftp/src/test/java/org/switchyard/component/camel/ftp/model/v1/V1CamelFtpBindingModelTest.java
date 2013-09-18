@@ -56,13 +56,20 @@ public class V1CamelFtpBindingModelTest extends V1BaseCamelServiceBindingModelTe
         "separator=UNIX&stepwise=true&throwExceptionOnConnectFailed=true&passiveMode=true&" +
         "timeout=10&soTimeout=10&siteCommand=PWD&initialDelay=500";
 
+    private final String _namespaceUri;
+
     public V1CamelFtpBindingModelTest() {
-        super(FtpEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.FTP_NAMESPACE_V1);
+    }
+
+    protected V1CamelFtpBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(FtpEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Override
     protected V1CamelFtpBindingModel createTestModel() {
-        V1CamelFtpBindingModel model = (V1CamelFtpBindingModel) new V1CamelFtpBindingModel()
+        V1CamelFtpBindingModel model = (V1CamelFtpBindingModel) new V1CamelFtpBindingModel(V1CamelFtpBindingModel.FTP, _namespaceUri)
             .setDirectory(DIRECTORY)
             .setAutoCreate(AUTO_CREATE);
         model.setHost(HOST)
@@ -81,7 +88,7 @@ public class V1CamelFtpBindingModelTest extends V1BaseCamelServiceBindingModelTe
             .setTimeout(TIMEOUT)
             .setSoTimeout(SO_TIMEOUT)
             .setSiteCommand(SITE_COMMAND);
-        V1CamelRemoteFileConsumerBindingModel consumer = new V1CamelRemoteFileConsumerBindingModel(V1CamelFtpBindingModel.CONSUME, Constants.FTP_NAMESPACE_V1);
+        V1CamelRemoteFileConsumerBindingModel consumer = new V1CamelRemoteFileConsumerBindingModel(V1CamelFtpBindingModel.CONSUME, _namespaceUri);
         consumer.setInitialDelay(INITIAL_DELAY);
         model.setConsumer(consumer);
         return model;

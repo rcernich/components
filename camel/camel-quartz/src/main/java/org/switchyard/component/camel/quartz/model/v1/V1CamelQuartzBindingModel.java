@@ -50,7 +50,16 @@ public class V1CamelQuartzBindingModel extends V1BaseCamelBindingModel
      * Create a new CamelDirectBindingModel.
      */
     public V1CamelQuartzBindingModel() {
-        super(QUARTZ, QUARTZ_NAMESPACE_V1);
+        this(QUARTZ_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new CamelDirectBindingModel.
+     * 
+     * @param namespace the namespace for this binding
+     */
+    public V1CamelQuartzBindingModel(String namespace) {
+        super(QUARTZ, namespace);
 
         setModelChildrenOrder(NAME, CRON, STATEFUL, START_TIME, END_TIME, TIMEZONE);
     }

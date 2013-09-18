@@ -13,15 +13,15 @@
  - limitations under the License.
  -->
 <switchyard 
-    xmlns="urn:switchyard-config:switchyard:1.0"
+    xmlns="urn:switchyard-config:switchyard:1.1"
     xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" 
-    xmlns:jca="urn:switchyard-component-jca:config:1.0" 
+    xmlns:jca="urn:switchyard-component-jca:config:1.1" 
     xmlns:bean="urn:switchyard-component-bean:config:1.0">
 
     <sca:composite name="JCAJMSTest" targetNamespace="urn:jca:test:1.0">
         <sca:service name="JCAJMSService" promote="ComponentName/JCAJMSService">
-            <binding.jca xmlns="urn:switchyard-component-jca:config:1.0">
-               <operationSelector xmlns="urn:switchyard-config:switchyard:1.0" operationName="onMessage"/>
+            <binding.jca xmlns="urn:switchyard-component-jca:config:1.1">
+               <operationSelector xmlns="urn:switchyard-config:switchyard:1.1" operationName="onMessage"/>
                <inboundConnection>
                    <resourceAdapter name="hornetq-ra.rar">
                        <property name="prop1" value="value1"/>

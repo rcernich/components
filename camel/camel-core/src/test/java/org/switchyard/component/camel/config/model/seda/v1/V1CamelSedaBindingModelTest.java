@@ -15,8 +15,11 @@ package org.switchyard.component.camel.config.model.seda.v1;
 
 import static junit.framework.Assert.assertEquals;
 
+import java.text.ParseException;
+
 import org.apache.camel.component.seda.SedaEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.core.model.Constants;
 import org.switchyard.component.camel.core.model.seda.v1.V1CamelSedaBindingModel;
 import org.switchyard.component.camel.core.model.v1.V1CamelBindingModel;
 
@@ -41,8 +44,15 @@ public class V1CamelSedaBindingModelTest extends V1BaseCamelServiceBindingModelT
         "&waitForTaskToComplete=Always&concurrentConsumers=3" +
         "&timeout=1000&multipleConsumers=true&limitConcurrentConsumers=false";
 
+    private final String _namespaceUri;
+
     public V1CamelSedaBindingModelTest() {
-        super(SedaEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.CORE_NAMESPACE_V1);
+    }
+
+    protected V1CamelSedaBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(SedaEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Override
@@ -58,7 +68,7 @@ public class V1CamelSedaBindingModelTest extends V1BaseCamelServiceBindingModelT
 
     @Override
     protected V1CamelSedaBindingModel createTestModel() {
-        return new V1CamelSedaBindingModel().setEndpointName(NAME)
+        return new V1CamelSedaBindingModel(_namespaceUri).setEndpointName(NAME)
             .setSize(SIZE)
             .setConcurrentConsumers(CONCURRENT_CONSUMERS)
             .setWaitForTaskToComplete(WAIT_FOR_TASK_TO_COMPLETE)

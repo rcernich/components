@@ -17,6 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 import org.apache.camel.component.mail.MailEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelReferenceBindingModelTest;
+import org.switchyard.component.camel.mail.model.Constants;
 
 /**
  * Test for {@link V1CamelMailBindingModel} with {@link V1CamelMailProducerBindingModel} set.
@@ -37,8 +38,15 @@ public class V1CamelMailProducerBindingModelTest extends V1BaseCamelReferenceBin
     private static final String CAMEL_URI = "smtps://rider?subject=Desert ride&" +
         "from=rider@camel&to=camel@rider&CC=mule@rider&BCC=rider@mule&replyTo=camel@camel";
 
+    private final String _namespaceUri;
+
     public V1CamelMailProducerBindingModelTest() {
-        super(MailEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.MAIL_NAMESPACE_V1);
+    }
+
+    protected V1CamelMailProducerBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(MailEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Override
@@ -55,7 +63,7 @@ public class V1CamelMailProducerBindingModelTest extends V1BaseCamelReferenceBin
 
     @Override
     protected V1CamelMailBindingModel createTestModel() {
-        V1CamelMailBindingModel model = new V1CamelMailBindingModel() {
+        V1CamelMailBindingModel model = new V1CamelMailBindingModel(_namespaceUri) {
             public boolean isReferenceBinding() {
                 return true;
             }
@@ -63,7 +71,7 @@ public class V1CamelMailProducerBindingModelTest extends V1BaseCamelReferenceBin
         model.setSecure(SECURE)
            .setHost(HOST);
 
-        V1CamelMailProducerBindingModel producer = new V1CamelMailProducerBindingModel()
+        V1CamelMailProducerBindingModel producer = new V1CamelMailProducerBindingModel(_namespaceUri)
             .setSubject(SUBJECT)
             .setFrom(FROM)
             .setTo(TO)

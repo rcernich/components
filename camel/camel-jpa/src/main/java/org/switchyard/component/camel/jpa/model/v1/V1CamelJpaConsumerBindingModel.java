@@ -54,7 +54,16 @@ public class V1CamelJpaConsumerBindingModel extends V1CamelScheduledBatchPollCon
      * Creates new binding model.
      */
     public V1CamelJpaConsumerBindingModel() {
-        super(V1CamelJpaBindingModel.CONSUME, JPA_NAMESPACE_V1);
+        this(JPA_NAMESPACE_V1);
+    }
+
+    /**
+     * Creates new binding model.
+     * 
+     * @param namespace the namespace for this element
+     */
+    public V1CamelJpaConsumerBindingModel(String namespace) {
+        super(V1CamelJpaBindingModel.CONSUME, namespace);
     }
 
     @Override

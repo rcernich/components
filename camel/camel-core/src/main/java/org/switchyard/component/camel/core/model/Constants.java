@@ -19,8 +19,13 @@ package org.switchyard.component.camel.core.model;
 public interface Constants {
 
     /**
-     * Core namespace.
+     * Core v1.1 namespace.
      */
-    String CORE_NAMESPACE_V1 = "urn:switchyard-component-camel-core:config:1.0";
+    String CORE_NAMESPACE_V1 = "urn:switchyard-component-camel-core:config:1.1";
+
+    /**
+     * Core v1.0 namespace.
+     */
+    String CORE_NAMESPACE_V1_0 = "urn:switchyard-component-camel-core:config:1.0";
 
 }

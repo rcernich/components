@@ -56,16 +56,22 @@ public class V1CamelAmqpBindingModelTest extends V1BaseCamelServiceBindingModelT
         "deliveryPersistent=false&priority=9&explicitQosEnabled=true&replyTo=esb_out&replyToType=Shared&" +
         "requestTimeout=300&selector=DEST='ESB'&timeToLive=3600&transacted=true&dummy=test";
 
-    public V1CamelAmqpBindingModelTest() {
-        super(JmsEndpoint.class, CAMEL_XML);
+    private final String _namespaceUri;
 
+    public V1CamelAmqpBindingModelTest() {
+        this(CAMEL_XML, Constants.AMQP_NAMESPACE_V1);
+    }
+
+    protected V1CamelAmqpBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(JmsEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
         setSkipCamelEndpointTesting(true);
     }
 
     @Override
     protected V1CamelAmqpBindingModel createTestModel() {
-        final V1CamelAmqpBindingModel model = new V1CamelAmqpBindingModel();
-        model.setAdditionalUriParameters(createAdditionalUriParametersModel(Constants.AMQP_NAMESPACE_V1, Collections.singletonMap("dummy", "test")));
+        final V1CamelAmqpBindingModel model = new V1CamelAmqpBindingModel(_namespaceUri);
+        model.setAdditionalUriParameters(createAdditionalUriParametersModel(_namespaceUri, Collections.singletonMap("dummy", "test")));
         model
                 .setTopic(TOPIC)
                 .setConnectionFactory(CONNECTION_FACTORY)

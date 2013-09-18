@@ -15,6 +15,7 @@ package org.switchyard.component.camel.model.v1;
 
 import org.switchyard.component.camel.common.marshaller.BaseModelMarshaller;
 import org.switchyard.component.camel.common.marshaller.ModelCreator;
+import org.switchyard.component.camel.model.Constants;
 import org.switchyard.config.Configuration;
 import org.switchyard.config.model.Descriptor;
 
@@ -39,6 +40,13 @@ public class V1CamelComponentModelMarshaller extends BaseModelMarshaller {
                     return new V1CamelImplementationModel(config, descriptor);
                 }
         });
+        register(Constants.COMPONENT_NAMESPACE_V1_0, V1CamelImplementationModel.IMPLEMENTATION + "." + V1CamelImplementationModel.CAMEL,
+                new ModelCreator<V1CamelImplementationModel>() {
+                    @Override
+                    public V1CamelImplementationModel create(Configuration config, Descriptor descriptor) {
+                        return new V1CamelImplementationModel(config, descriptor);
+                    }
+            });
     }
 
 }

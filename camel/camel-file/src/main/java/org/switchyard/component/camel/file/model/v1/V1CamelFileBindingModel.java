@@ -55,7 +55,16 @@ public class V1CamelFileBindingModel extends V1GenericFileBindingModel
      * Create a new V1CamelFileBindingModel.
      */
     public V1CamelFileBindingModel() {
-        super(FILE, FILE_NAMESPACE_V1);
+        this(FILE_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new V1CamelFileBindingModel.
+     * 
+     * @param namespace the namespace for this file binding
+     */
+    public V1CamelFileBindingModel(String namespace) {
+        super(FILE, namespace);
 
         setModelChildrenOrder(CONSUME, PRODUCE);
     }

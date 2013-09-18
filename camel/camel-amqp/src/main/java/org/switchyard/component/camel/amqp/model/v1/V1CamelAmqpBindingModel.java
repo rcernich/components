@@ -40,7 +40,16 @@ public class V1CamelAmqpBindingModel extends V1CamelJmsBindingModel
      * Default consturctor, creates binding using only prefix.
      */
     public V1CamelAmqpBindingModel() {
-        super(AMQP, AMQP_NAMESPACE_V1);
+        this(AMQP_NAMESPACE_V1);
+    }
+
+    /**
+     * Creates binding using specified namespace.
+     * 
+     * @param namespaceUri the namespace
+     */
+    public V1CamelAmqpBindingModel(String namespaceUri) {
+        super(AMQP, namespaceUri);
     }
 
     /**

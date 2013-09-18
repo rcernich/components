@@ -54,23 +54,31 @@ public class V1CamelQuartzBindingModelTest extends V1BaseCamelServiceBindingMode
         } catch (Exception e) { /* ignore */ }
     }
 
-    public V1CamelQuartzBindingModelTest() {
-        super(QuartzEndpoint.class, CAMEL_XML);
+    private final String _namespaceUri;
 
+    public V1CamelQuartzBindingModelTest() {
+        this(CAMEL_XML, Constants.QUARTZ_NAMESPACE_V1);
+    }
+
+    protected V1CamelQuartzBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(QuartzEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
         setSkipCamelEndpointTesting(true);
     }
 
     @Override
     protected V1CamelQuartzBindingModel createTestModel() {
-        final V1CamelQuartzBindingModel model = new V1CamelQuartzBindingModel();
-        model.setAdditionalUriParameters(createAdditionalUriParametersModel(Constants.QUARTZ_NAMESPACE_V1, Collections.singletonMap("trigger.timeZone", "GMT")));
-        return (V1CamelQuartzBindingModel) model
-            .setTimerName(NAME)
+        final V1CamelQuartzBindingModel model = new V1CamelQuartzBindingModel(_namespaceUri);
+        model.setAdditionalUriParameters(createAdditionalUriParametersModel(_namespaceUri, Collections.singletonMap("trigger.timeZone", "GMT")));
+        model.setTimerName(NAME)
             .setCron(CRON)
             .setStateful(STATEFUL)
             .setStartTime(START_TIME)
-            .setEndTime(END_TIME)
-            .setTimeZone(TIMEZONE);
+            .setEndTime(END_TIME);
+        if (getTimeZone() != null) {
+            model.setTimeZone(getTimeZone());
+        }
+        return model;
     }
 
     @Override
@@ -80,7 +88,7 @@ public class V1CamelQuartzBindingModelTest extends V1BaseCamelServiceBindingMode
         assertEquals(STATEFUL, model.isStateful());
         assertEquals(START_TIME, model.getStartTime());
         assertEquals(END_TIME, model.getEndTime());
-        assertEquals(TIMEZONE, model.getTimeZone());
+        assertEquals(getTimeZone(), model.getTimeZone());
     }
 
     @Override
@@ -88,4 +96,7 @@ public class V1CamelQuartzBindingModelTest extends V1BaseCamelServiceBindingMode
         return CAMEL_URI;
     }
 
+    protected String getTimeZone() {
+        return TIMEZONE;
+    }
 }

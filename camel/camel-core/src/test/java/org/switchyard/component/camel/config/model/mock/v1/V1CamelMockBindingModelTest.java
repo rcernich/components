@@ -16,7 +16,9 @@ package org.switchyard.component.camel.config.model.mock.v1;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.camel.component.seda.SedaEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.core.model.Constants;
 import org.switchyard.component.camel.core.model.mock.v1.V1CamelMockBindingModel;
 import org.switchyard.component.camel.core.model.v1.V1CamelBindingModel;
 
@@ -34,13 +36,20 @@ public class V1CamelMockBindingModelTest extends V1BaseCamelServiceBindingModelT
 
     private static final String CAMEL_URI = "mock://fooMockName?reportGroup=999";
 
+    private final String _namespaceUri;
+
     public V1CamelMockBindingModelTest() {
-        super(MockEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.CORE_NAMESPACE_V1);
+    }
+
+    protected V1CamelMockBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(MockEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Override
     protected V1CamelMockBindingModel createTestModel() {
-        return new V1CamelMockBindingModel().setEndpointName(NAME).setReportGroup(REPORT_GROUP);
+        return new V1CamelMockBindingModel(_namespaceUri).setEndpointName(NAME).setReportGroup(REPORT_GROUP);
     }
 
     @Override

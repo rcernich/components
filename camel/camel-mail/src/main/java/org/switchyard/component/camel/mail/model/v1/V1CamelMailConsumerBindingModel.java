@@ -52,7 +52,16 @@ public class V1CamelMailConsumerBindingModel extends V1CamelScheduledBatchPollCo
      * Creates new consumer binding model.
      */
     public V1CamelMailConsumerBindingModel() {
-        super(V1CamelMailBindingModel.CONSUME, MAIL_NAMESPACE_V1);
+        this(MAIL_NAMESPACE_V1);
+    }
+
+    /**
+     * Creates new consumer binding model.
+     * 
+     * @param namespace the namespace for this element
+     */
+    public V1CamelMailConsumerBindingModel(String namespace) {
+        super(V1CamelMailBindingModel.CONSUME, namespace);
 
         setModelChildrenOrder(FOLDER_NAME, FETCH_SIZE, UNSEEN, DELETE, COPY_TO, DISCONNECT);
     }

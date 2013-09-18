@@ -26,7 +26,12 @@ public interface ClojureComponentImplementationModel extends ComponentImplementa
     /**
      * The "clojure" namespace.
      */
-    public static final String DEFAULT_NAMESPACE = "urn:switchyard-component-clojure:config:1.0";
+    public static final String DEFAULT_NAMESPACE = "urn:switchyard-component-clojure:config:1.1";
+    
+    /**
+     * The "clojure" 1.0 namespace.
+     */
+    public static final String NAMESPACE_1_0 = "urn:switchyard-component-clojure:config:1.0";
     
     /**
      * The 'clojure' implementation type.

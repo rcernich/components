@@ -36,7 +36,17 @@ public class V1ClojureComponentImplementationModel extends V1ComponentImplementa
      * this model.
      */
     public V1ClojureComponentImplementationModel() {
-        super(CLOJURE, DEFAULT_NAMESPACE);
+        this(DEFAULT_NAMESPACE);
+    }
+
+    /**
+     * No args constructor that uses the specified namespace when constructing
+     * this model.
+     * 
+     * @param namespace the namespace for this impl
+     */
+    public V1ClojureComponentImplementationModel(String namespace) {
+        super(CLOJURE, namespace);
     }
 
     /**

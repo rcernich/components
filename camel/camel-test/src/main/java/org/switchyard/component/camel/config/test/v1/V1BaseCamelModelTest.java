@@ -118,7 +118,7 @@ public abstract class V1BaseCamelModelTest<T extends CamelBindingModel> {
         return context.getEndpoint(configUri, enpointType);
     }
 
-    protected static AdditionalUriParametersModel createAdditionalUriParametersModel(String namespace,
+    protected AdditionalUriParametersModel createAdditionalUriParametersModel(String namespace,
             Map<String, String> parameters) {
         final AdditionalUriParametersModel retVal = new V1AdditionalUriParametersModel(namespace);
         for (Entry<String, String> entry : parameters.entrySet()) {

@@ -18,6 +18,7 @@ import static org.switchyard.component.camel.quartz.Constants.QUARTZ_NAMESPACE_V
 
 import org.switchyard.component.camel.common.marshaller.BaseModelMarshaller;
 import org.switchyard.component.camel.common.marshaller.ModelCreator;
+import org.switchyard.component.camel.quartz.Constants;
 import org.switchyard.config.Configuration;
 import org.switchyard.config.model.Descriptor;
 
@@ -35,6 +36,12 @@ public class V1CamelQuartzModelMarshaller extends BaseModelMarshaller {
         super(desc, QUARTZ_NAMESPACE_V1);
 
         registerBinding(QUARTZ, new ModelCreator<V1CamelQuartzBindingModel>() {
+            @Override
+            public V1CamelQuartzBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelQuartzBindingModel(config, descriptor);
+            }
+        });
+        registerBinding(Constants.QUARTZ_NAMESPACE_V1_0, QUARTZ, new ModelCreator<V1CamelQuartzBindingModel>() {
             @Override
             public V1CamelQuartzBindingModel create(Configuration config, Descriptor descriptor) {
                 return new V1CamelQuartzBindingModel(config, descriptor);

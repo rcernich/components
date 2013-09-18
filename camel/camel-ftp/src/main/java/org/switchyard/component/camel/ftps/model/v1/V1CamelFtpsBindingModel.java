@@ -54,7 +54,16 @@ public class V1CamelFtpsBindingModel extends V1CamelFtpBindingModel implements
      * Default constuctor. Creates CamelFtpBindingModel.
      */
     public V1CamelFtpsBindingModel() {
-        super(FTPS, FTP_NAMESPACE_V1);
+        this(FTP_NAMESPACE_V1);
+    }
+
+    /**
+     * Default constuctor. Creates CamelFtpBindingModel.
+     * 
+     * @param namespace the namespace for this binding
+     */
+    public V1CamelFtpsBindingModel(String namespace) {
+        super(FTPS, namespace);
 
         setModelChildrenOrder(SECURITY_PROTOCOL, IMPLICT, EXEC_PBSZ, EXEC_PROT, DISABLE_SECURE_DATA_CHANNEL_DEFAULTS);
     }

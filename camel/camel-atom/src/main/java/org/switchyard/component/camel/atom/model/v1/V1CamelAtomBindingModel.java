@@ -60,7 +60,16 @@ public class V1CamelAtomBindingModel extends V1BaseCamelBindingModel
      * Create a new AtomBindingModel.
      */
     public V1CamelAtomBindingModel() {
-        super(ATOM, ATOM_NAMESPACE_V1);
+        this(ATOM_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new AtomBindingModel.
+     * 
+     * @param namespace the namespace for this atom binding
+     */
+    public V1CamelAtomBindingModel(String namespace) {
+        super(ATOM, namespace);
 
         setModelChildrenOrder(FEED_URI, SPLIT_ENTRIES, FILTER, LAST_UPDATE,
             THROTTLE_ENTRIES, FEED_HEADER, SORT_ENTRIES, CONSUME);

@@ -13,9 +13,9 @@
  - limitations under the License.
  -->
 <sd:switchyard 
-    xmlns="urn:switchyard-component-clojure:config:1.0" 
+    xmlns="urn:switchyard-component-clojure:config:1.1" 
     xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" 
-    xmlns:sd="urn:switchyard-config:switchyard:1.0">
+    xmlns:sd="urn:switchyard-config:switchyard:1.1">
 
     <sca:composite name="switchyard-clojure-impl-file" targetNamespace="urn:clojure:test:1.0">
         <sca:component name="ClojureComponent">

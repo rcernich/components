@@ -41,7 +41,16 @@ public class V1CamelNettyTcpBindingModel extends V1CamelNettyBindingModel
      * Create a new CamelDirectBindingModel.
      */
     public V1CamelNettyTcpBindingModel() {
-        super(TCP, NETTY_NAMESPACE_V1);
+        this(NETTY_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new CamelDirectBindingModel.
+     * 
+     * @param namespace the namespace for this binding
+     */
+    public V1CamelNettyTcpBindingModel(String namespace) {
+        super(TCP, namespace);
         setModelChildrenOrder(TEXTLINE, TCP_NO_DELAY, KEEP_ALIVE);
     }
 

@@ -15,6 +15,7 @@ package org.switchyard.component.camel.jms.model.v1;
 
 import org.switchyard.component.camel.common.marshaller.BaseModelMarshaller;
 import org.switchyard.component.camel.common.marshaller.ModelCreator;
+import org.switchyard.component.camel.jms.model.Constants;
 import org.switchyard.config.Configuration;
 import org.switchyard.config.model.Descriptor;
 
@@ -34,6 +35,12 @@ public class V1CamelJmsModelMarshaller extends BaseModelMarshaller {
         super(desc, JMS_NAMESPACE_V1);
 
         registerBinding(V1CamelJmsBindingModel.JMS, new ModelCreator<V1CamelJmsBindingModel>() {
+            @Override
+            public V1CamelJmsBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelJmsBindingModel(config, descriptor);
+            }
+        });
+        registerBinding(Constants.JMS_NAMESPACE_V1_0, V1CamelJmsBindingModel.JMS, new ModelCreator<V1CamelJmsBindingModel>() {
             @Override
             public V1CamelJmsBindingModel create(Configuration config, Descriptor descriptor) {
                 return new V1CamelJmsBindingModel(config, descriptor);

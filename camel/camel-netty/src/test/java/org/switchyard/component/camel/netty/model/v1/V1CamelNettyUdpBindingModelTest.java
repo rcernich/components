@@ -17,6 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 import org.apache.camel.component.netty.NettyEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.netty.model.Constants;
 
 /**
  * Test for {@link V1CamelNettyBindingModel}.
@@ -33,15 +34,21 @@ public class V1CamelNettyUdpBindingModelTest extends V1BaseCamelServiceBindingMo
 
     private static final String CAMEL_URI = "netty:udp://google.com:10231?broadcast=true";
 
-    public V1CamelNettyUdpBindingModelTest() {
-        super(NettyEndpoint.class, CAMEL_XML);
+    private final String _namespaceUri;
 
+    public V1CamelNettyUdpBindingModelTest() {
+        this(CAMEL_XML, Constants.NETTY_NAMESPACE_V1);
+    }
+
+    protected V1CamelNettyUdpBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(NettyEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
         setSkipCamelEndpointTesting(true);
     }
 
     @Override
     protected V1CamelNettyUdpBindingModel createTestModel() {
-        return ((V1CamelNettyUdpBindingModel) new V1CamelNettyUdpBindingModel()
+        return ((V1CamelNettyUdpBindingModel) new V1CamelNettyUdpBindingModel(_namespaceUri)
             .setHost(HOST)
             .setPort(PORT))
             .setBroadcast(BROADCAST);

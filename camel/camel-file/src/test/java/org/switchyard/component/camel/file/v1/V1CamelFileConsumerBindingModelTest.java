@@ -18,6 +18,7 @@ import static junit.framework.Assert.assertEquals;
 import org.apache.camel.component.file.FileEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
 import org.switchyard.component.camel.file.model.CamelFileConsumerBindingModel;
+import org.switchyard.component.camel.file.model.Constants;
 import org.switchyard.component.camel.file.model.v1.V1CamelFileBindingModel;
 import org.switchyard.component.camel.file.model.v1.V1CamelFileConsumerBindingModel;
 
@@ -56,16 +57,23 @@ public class V1CamelFileConsumerBindingModelTest extends V1BaseCamelServiceBindi
         "readLock=fileLock&readLockTimeout=10&readLockCheckInterval=1000&" +
         "startingDirectoryMustExist=false&directoryMustExist=true&doneFileName=done";
 
+    private final String _namespaceUri;
+
     public V1CamelFileConsumerBindingModelTest() {
-        super(FileEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.FILE_NAMESPACE_V1);
+    }
+
+    protected V1CamelFileConsumerBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(FileEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Override
     protected V1CamelFileBindingModel createTestModel() {
-        V1CamelFileBindingModel fileModel = new V1CamelFileBindingModel();
+        V1CamelFileBindingModel fileModel = new V1CamelFileBindingModel(_namespaceUri);
         fileModel.setDirectory(DIRECTORY);
 
-        V1CamelFileConsumerBindingModel model = (V1CamelFileConsumerBindingModel) new V1CamelFileConsumerBindingModel()
+        V1CamelFileConsumerBindingModel model = (V1CamelFileConsumerBindingModel) new V1CamelFileConsumerBindingModel(_namespaceUri)
             .setInitialDelay(INITIAL_DELAY)
             .setDelay(DELAY);
         model.setMaxMessagesPerPoll(MAX_MESSAGES_PER_POLL);

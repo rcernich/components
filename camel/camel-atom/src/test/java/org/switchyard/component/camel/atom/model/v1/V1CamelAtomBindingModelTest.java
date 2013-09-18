@@ -46,13 +46,18 @@ public class V1CamelAtomBindingModelTest extends V1BaseCamelServiceBindingModelT
     private static final Boolean SPLIT = true;
     private static final Boolean THROTTLED = true;
 
-    public V1CamelAtomBindingModelTest() throws ParseException {
-        super(FeedEndpoint.class, CAMEL_XML);
+    private final String _namespaceUri;
 
-        referenceDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-            .parse("2011-01-01T12:00:00");
+    public V1CamelAtomBindingModelTest() throws ParseException {
+        this(CAMEL_XML, Constants.ATOM_NAMESPACE_V1);
     }
 
+
+    protected V1CamelAtomBindingModelTest(String testConfigPath, String namespaceUri) throws ParseException {
+        super(FeedEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
+        referenceDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("2011-01-01T12:00:00");
+    }
 
     @Override
     protected void createModelAssertions(V1CamelAtomBindingModel model) {
@@ -67,7 +72,7 @@ public class V1CamelAtomBindingModelTest extends V1BaseCamelServiceBindingModelT
 
     @Override
     protected V1CamelAtomBindingModel createTestModel() {
-        V1CamelAtomBindingModel abm = new V1CamelAtomBindingModel()
+        V1CamelAtomBindingModel abm = new V1CamelAtomBindingModel(_namespaceUri)
             .setFeedURI(FEED_URI)
             .setSplitEntries(SPLIT)
             .setFilter(FILTERED)
@@ -76,7 +81,7 @@ public class V1CamelAtomBindingModelTest extends V1BaseCamelServiceBindingModelT
             .setFeedHeader(FEED_HEADER)
             .setSortEntries(SORTED);
 
-        CamelScheduledPollConsumer consumer = new V1CamelScheduledPollConsumer(V1CamelAtomBindingModel.CONSUME, Constants.ATOM_NAMESPACE_V1)
+        CamelScheduledPollConsumer consumer = new V1CamelScheduledPollConsumer(V1CamelAtomBindingModel.CONSUME, _namespaceUri)
             .setInitialDelay(20000)
             .setDelay(15000)
             .setUseFixedDelay(true);

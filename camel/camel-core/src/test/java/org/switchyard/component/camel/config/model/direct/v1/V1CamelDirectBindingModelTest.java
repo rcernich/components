@@ -17,6 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 import org.apache.camel.component.direct.DirectEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.core.model.Constants;
 import org.switchyard.component.camel.core.model.direct.v1.V1CamelDirectBindingModel;
 import org.switchyard.component.camel.core.model.v1.V1CamelBindingModel;
 
@@ -33,8 +34,15 @@ public class V1CamelDirectBindingModelTest extends V1BaseCamelServiceBindingMode
 
     private static final String CAMEL_URI = "direct://fooDirectName";
 
+    private final String _namespaceUri;
+
     public V1CamelDirectBindingModelTest() {
-        super(DirectEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.CORE_NAMESPACE_V1);
+    }
+
+    protected V1CamelDirectBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(DirectEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Override
@@ -49,7 +57,7 @@ public class V1CamelDirectBindingModelTest extends V1BaseCamelServiceBindingMode
 
     @Override
     protected V1CamelDirectBindingModel createTestModel() {
-        return new V1CamelDirectBindingModel().setEndpointName(NAME);
+        return new V1CamelDirectBindingModel(_namespaceUri).setEndpointName(NAME);
     }
 
 }

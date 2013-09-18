@@ -19,8 +19,13 @@ package org.switchyard.component.camel.quartz;
 public interface Constants {
 
     /**
-     * Quartz v1 namespace.
+     * Quartz v1.1 namespace.
      */
-    String QUARTZ_NAMESPACE_V1 = "urn:switchyard-component-camel-quartz:config:1.0";
+    String QUARTZ_NAMESPACE_V1 = "urn:switchyard-component-camel-quartz:config:1.1";
+
+    /**
+     * Quartz v1.0 namespace.
+     */
+    String QUARTZ_NAMESPACE_V1_0 = "urn:switchyard-component-camel-quartz:config:1.0";
 
 }

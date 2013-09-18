@@ -42,7 +42,16 @@ public class V1CamelMailProducerBindingModel extends V1BaseCamelModel
      * Creates new producer binding model.
      */
     public V1CamelMailProducerBindingModel() {
-        super(V1CamelMailBindingModel.PRODUCE, MAIL_NAMESPACE_V1);
+        this(MAIL_NAMESPACE_V1);
+    }
+
+    /**
+     * Creates new producer binding model.
+     * 
+     * @param namespace the namespace for this element
+     */
+    public V1CamelMailProducerBindingModel(String namespace) {
+        super(V1CamelMailBindingModel.PRODUCE, namespace);
 
         setModelChildrenOrder(SUBJECT, FROM, TO, CC, BCC, REPLY_TO);
     }

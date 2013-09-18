@@ -19,8 +19,13 @@ package org.switchyard.component.camel.jpa.model;
 public interface Constants {
 
     /**
-     * Jpa v1 namespace.
+     * Jpa v1.1 namespace.
      */
-    String JPA_NAMESPACE_V1 = "urn:switchyard-component-camel-jpa:config:1.0";
+    String JPA_NAMESPACE_V1 = "urn:switchyard-component-camel-jpa:config:1.1";
+
+    /**
+     * Jpa v1.0 namespace.
+     */
+    String JPA_NAMESPACE_V1_0 = "urn:switchyard-component-camel-jpa:config:1.0";
 
 }

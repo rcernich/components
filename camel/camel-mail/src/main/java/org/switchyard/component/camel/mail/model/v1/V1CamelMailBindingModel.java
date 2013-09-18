@@ -68,7 +68,16 @@ public class V1CamelMailBindingModel extends V1BaseCamelBindingModel
      * Creates new mail binding model.
      */
     public V1CamelMailBindingModel() {
-        super(MAIL, MAIL_NAMESPACE_V1);
+        this(MAIL_NAMESPACE_V1);
+    }
+
+    /**
+     * Creates new mail binding model.
+     * 
+     * @param namespace the namespace for this binding
+     */
+    public V1CamelMailBindingModel(String namespace) {
+        super(MAIL, namespace);
 
         setModelChildrenOrder(HOST, PORT, USERNAME, PASSWORD, CONNECTION_TIMEOUT,
             CONSUME, PRODUCE);

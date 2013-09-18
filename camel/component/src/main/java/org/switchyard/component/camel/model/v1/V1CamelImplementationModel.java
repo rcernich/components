@@ -39,7 +39,16 @@ public class V1CamelImplementationModel extends V1ComponentImplementationModel
      * Create a new CamelImplementationModel.
      */
     public V1CamelImplementationModel() {
-        super(CAMEL, COMPONENT_NAMESPACE_V1);
+        this(COMPONENT_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new CamelImplementationModel.
+     * 
+     * @param namespace the namespace for this impl
+     */
+    public V1CamelImplementationModel(String namespace) {
+        super(CAMEL, namespace);
     }
 
     /**

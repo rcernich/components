@@ -51,7 +51,16 @@ public class V1CamelSedaBindingModel extends V1BaseCamelBindingModel
      * Create a new CamelSedaBindingModel.
      */
     public V1CamelSedaBindingModel() {
-        super(SEDA, CORE_NAMESPACE_V1);
+        this(CORE_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new CamelSedaBindingModel.
+     * 
+     * @param namespace the namespace for this seda binding
+     */
+    public V1CamelSedaBindingModel(String namespace) {
+        super(SEDA, namespace);
 
         setModelChildrenOrder(NAME, SIZE, CONCURRENT_CONSUMERS, WAIT_FOR_TASK_TO_COMPLETE,
             TIMEOUT, MULTIPLE_CONSUMERS, LIMIT_CONCURRENT_CONSUMERS);

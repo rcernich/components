@@ -32,7 +32,16 @@ public class V1CamelFileProducerBindingModel extends V1GenericFileProducerBindin
      * Create a new V1CamelFileProducerBindingModel.
      */
     public V1CamelFileProducerBindingModel() {
-        super(V1CamelFileBindingModel.PRODUCE, FILE_NAMESPACE_V1);
+        this(FILE_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new V1CamelFileProducerBindingModel.
+     * 
+     * @param namespace the namespace for this producer model
+     */
+    public V1CamelFileProducerBindingModel(String namespace) {
+        super(V1CamelFileBindingModel.PRODUCE, namespace);
     }
 
     /**

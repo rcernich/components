@@ -19,8 +19,13 @@ package org.switchyard.component.camel.atom.model;
 public interface Constants {
 
     /**
-     * Atom v1 namespace.
+     * Atom v1.1 namespace.
      */
-    String ATOM_NAMESPACE_V1 = "urn:switchyard-component-camel-atom:config:1.0";
+    String ATOM_NAMESPACE_V1 = "urn:switchyard-component-camel-atom:config:1.1";
+
+    /**
+     * Atom v1.0 namespace.
+     */
+    String ATOM_NAMESPACE_V1_0 = "urn:switchyard-component-camel-atom:config:1.0";
 
 }

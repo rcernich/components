@@ -17,6 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 import org.apache.camel.component.sql.SqlEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelReferenceBindingModelTest;
+import org.switchyard.component.camel.sql.model.Constants;
 
 /**
  * Test for {@link V1CamelSqlBindingModel}.
@@ -33,15 +34,21 @@ public class V1CamelSqlBindingModelTest extends V1BaseCamelReferenceBindingModel
     private static final Boolean BATCH = false;
     private static final String PLACEHOLDER = "?";
 
-    public V1CamelSqlBindingModelTest() {
-        super(SqlEndpoint.class, CAMEL_XML);
+    private final String _namespaceUri;
 
+    public V1CamelSqlBindingModelTest() {
+        this(CAMEL_XML, Constants.SQL_NAMESPACE_V1);
+    }
+
+    protected V1CamelSqlBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(SqlEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
         setSkipCamelEndpointTesting(true);
     }
 
     @Override
     protected V1CamelSqlBindingModel createTestModel() {
-        return new V1CamelSqlBindingModel()
+        return new V1CamelSqlBindingModel(_namespaceUri)
             .setQuery(QUERY)
             .setDataSourceRef(DATA_SOURCE_REF)
             .setBatch(BATCH)

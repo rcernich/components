@@ -18,6 +18,7 @@ import static junit.framework.Assert.assertEquals;
 import org.apache.camel.component.mail.MailEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
 import org.switchyard.component.camel.mail.model.CamelMailConsumerBindingModel;
+import org.switchyard.component.camel.mail.model.Constants;
 import org.switchyard.component.camel.mail.model.v1.V1CamelMailConsumerBindingModel.AccountType;
 
 /**
@@ -40,13 +41,20 @@ public class V1CamelMailConsumerBindingModelTest extends V1BaseCamelServiceBindi
 
     private static final String CAMEL_URI = "pop3s://localhost?folderName=Mail/Inbox&fetchSize=10&unseen=false&delete=true&copyTo=SEEN&disconnect=true";
 
+    private final String _namespaceUri;
+
     public V1CamelMailConsumerBindingModelTest() {
-        super(MailEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.MAIL_NAMESPACE_V1);
+    }
+
+    protected V1CamelMailConsumerBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(MailEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Override
     protected V1CamelMailBindingModel createTestModel() {
-        V1CamelMailBindingModel model = new V1CamelMailBindingModel() {
+        V1CamelMailBindingModel model = new V1CamelMailBindingModel(_namespaceUri) {
             @Override
             public boolean isReferenceBinding() {
                 return false;
@@ -56,7 +64,7 @@ public class V1CamelMailConsumerBindingModelTest extends V1BaseCamelServiceBindi
         model.setSecure(SECURE);
         model.setHost(HOST);
 
-        CamelMailConsumerBindingModel consumer = new V1CamelMailConsumerBindingModel()
+        CamelMailConsumerBindingModel consumer = new V1CamelMailConsumerBindingModel(_namespaceUri)
             .setAccountType(ACCOUNT_TYPE)
             .setFolderName(FOLDER_NAME)
             .setFetchSize(FETCH_SIZE)

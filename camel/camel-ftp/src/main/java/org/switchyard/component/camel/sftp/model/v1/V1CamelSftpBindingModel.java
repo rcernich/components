@@ -52,7 +52,16 @@ public class V1CamelSftpBindingModel extends V1CamelRemoteFileBindingModel
      * Create CamelSftpBindingModel.
      */
     public V1CamelSftpBindingModel() {
-        super(SFTP, FTP_NAMESPACE_V1);
+        this(FTP_NAMESPACE_V1);
+    }
+
+    /**
+     * Create CamelSftpBindingModel.
+     * 
+     * @param namespace the namespace for this binding
+     */
+    public V1CamelSftpBindingModel(String namespace) {
+        super(SFTP, namespace);
 
         setModelChildrenOrder(KNOWN_HOSTS_FILE, PRIVATE_KEY_FILE, PRIVATE_KEY_FILE_PASSPHRASE,
             PRODUCE, CONSUME);

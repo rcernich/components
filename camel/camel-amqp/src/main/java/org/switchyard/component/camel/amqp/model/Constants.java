@@ -19,8 +19,12 @@ package org.switchyard.component.camel.amqp.model;
 public interface Constants {
 
     /**
-     * AMQP v1 namespace.
+     * AMQP v1.0 namespace.
      */
-    String AMQP_NAMESPACE_V1 = "urn:switchyard-component-camel-amqp:config:1.0";
+    String AMQP_NAMESPACE_V1_0 = "urn:switchyard-component-camel-amqp:config:1.0";
 
+    /**
+     * AMQP v1.1 namespace.
+     */
+    String AMQP_NAMESPACE_V1 = "urn:switchyard-component-camel-amqp:config:1.1";
 }

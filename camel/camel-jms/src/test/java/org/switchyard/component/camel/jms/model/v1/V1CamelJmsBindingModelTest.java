@@ -17,6 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 import org.apache.camel.component.jms.JmsEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.jms.model.Constants;
 
 /**
  * Test for {@link V1CamelJmsBindingModel}.
@@ -55,15 +56,21 @@ public class V1CamelJmsBindingModelTest extends V1BaseCamelServiceBindingModelTe
         "deliveryPersistent=false&priority=9&explicitQosEnabled=true&replyTo=esb_out&replyToType=Shared&" +
         "requestTimeout=300&selector=DEST='ESB'&timeToLive=3600&transacted=true&acknowledgementModeName=AUTO_ACKNOWLEDGE&acknowledgementMode=-1";
 
-    public V1CamelJmsBindingModelTest() {
-        super(JmsEndpoint.class, CAMEL_XML);
+    private final String _namespaceUri;
 
+    public V1CamelJmsBindingModelTest() {
+        this(CAMEL_XML, Constants.JMS_NAMESPACE_V1);
+    }
+
+    protected V1CamelJmsBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(JmsEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
         setSkipCamelEndpointTesting(true);
     }
 
     @Override
     protected V1CamelJmsBindingModel createTestModel() {
-        return (V1CamelJmsBindingModel) new V1CamelJmsBindingModel()
+        return (V1CamelJmsBindingModel) new V1CamelJmsBindingModel(V1CamelJmsBindingModel.JMS, _namespaceUri)
             .setTopic(TOPIC)
             .setConnectionFactory(CONNECTION_FACTORY)
             .setUsername(USERNAME)

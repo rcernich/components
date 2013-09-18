@@ -47,7 +47,16 @@ public class V1CamelJpaProducerBindingModel extends V1BaseCamelModel
      * Creates new binding model.
      */
     public V1CamelJpaProducerBindingModel() {
-        super(V1CamelJpaBindingModel.PRODUCE, JPA_NAMESPACE_V1);
+        this(JPA_NAMESPACE_V1);
+    }
+
+    /**
+     * Creates new binding model.
+     * 
+     * @param namespace the namespace for this element
+     */
+    public V1CamelJpaProducerBindingModel(String namespace) {
+        super(V1CamelJpaBindingModel.PRODUCE, namespace);
     }
 
     @Override

@@ -17,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.camel.component.file.remote.FtpsEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.ftp.Constants;
 
 /**
  * Test for {@link V1CamelFtpsBindingModel}.
@@ -31,13 +32,20 @@ public class V1CamelFtpsBindingModelTest extends V1BaseCamelServiceBindingModelT
     private static final Boolean IMPLICT = false;
     private static final String CAMEL_URI = "ftps://localhost/test?isImplicit=false";
 
+    private final String _namespaceUri;
+
     public V1CamelFtpsBindingModelTest() {
-        super(FtpsEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.FTP_NAMESPACE_V1);
+    }
+
+    protected V1CamelFtpsBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(FtpsEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Override
     protected V1CamelFtpsBindingModel createTestModel() {
-        V1CamelFtpsBindingModel model = (V1CamelFtpsBindingModel) new V1CamelFtpsBindingModel()
+        V1CamelFtpsBindingModel model = (V1CamelFtpsBindingModel) new V1CamelFtpsBindingModel(_namespaceUri)
             .setDirectory(DIRECTORY)
             .setHost(HOST);
 

@@ -19,8 +19,13 @@ package org.switchyard.component.camel.ftp;
 public interface Constants {
 
     /**
-     * Ftp v1 namespace.
+     * Ftp v1.1 namespace.
      */
-    String FTP_NAMESPACE_V1 = "urn:switchyard-component-camel-ftp:config:1.0";
+    String FTP_NAMESPACE_V1 = "urn:switchyard-component-camel-ftp:config:1.1";
+
+    /**
+     * Ftp v1.0 namespace.
+     */
+    String FTP_NAMESPACE_V1_0 = "urn:switchyard-component-camel-ftp:config:1.0";
 
 }

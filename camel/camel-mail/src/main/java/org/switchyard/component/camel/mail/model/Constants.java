@@ -19,8 +19,13 @@ package org.switchyard.component.camel.mail.model;
 public interface Constants {
 
     /**
-     * Mail v1 namespace.
+     * Mail v1.1 namespace.
      */
-    String MAIL_NAMESPACE_V1 = "urn:switchyard-component-camel-mail:config:1.0";
+    String MAIL_NAMESPACE_V1 = "urn:switchyard-component-camel-mail:config:1.1";
+
+    /**
+     * Mail v1.0 namespace.
+     */
+    String MAIL_NAMESPACE_V1_0 = "urn:switchyard-component-camel-mail:config:1.0";
 
 }

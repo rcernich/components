@@ -17,6 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 import org.apache.camel.component.file.FileEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.file.model.Constants;
 import org.switchyard.component.camel.file.model.v1.V1CamelFileBindingModel;
 
 /**
@@ -36,8 +37,15 @@ public class V1CamelFileBindingModelTest extends V1BaseCamelServiceBindingModelT
     private static final String CAMEL_URI = "file:///input/directory?autoCreate=false&" +
         "bufferSize=2048&charset=cp1250&fileName=fname&flatten=true";
 
+    private final String _namespaceUri;
+
     public V1CamelFileBindingModelTest() {
-        super(FileEndpoint.class, CAMEL_XML);
+        this(CAMEL_XML, Constants.FILE_NAMESPACE_V1);
+    }
+
+    protected V1CamelFileBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(FileEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
     }
 
     @Override
@@ -52,7 +60,7 @@ public class V1CamelFileBindingModelTest extends V1BaseCamelServiceBindingModelT
 
     @Override
     protected V1CamelFileBindingModel createTestModel() {
-        return (V1CamelFileBindingModel) new V1CamelFileBindingModel()
+        return (V1CamelFileBindingModel) new V1CamelFileBindingModel(_namespaceUri)
             .setDirectory(DIRECTORY)
             .setAutoCreate(AUTO_CREATE)
             .setBufferSize(BUFFER_SIZE)

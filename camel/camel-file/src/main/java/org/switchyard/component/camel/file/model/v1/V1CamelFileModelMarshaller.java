@@ -17,6 +17,7 @@ import static org.switchyard.component.camel.file.model.Constants.FILE_NAMESPACE
 
 import org.switchyard.component.camel.common.marshaller.BaseModelMarshaller;
 import org.switchyard.component.camel.common.marshaller.ModelCreator;
+import org.switchyard.component.camel.file.model.Constants;
 import org.switchyard.config.Configuration;
 import org.switchyard.config.model.Descriptor;
 
@@ -33,6 +34,12 @@ public class V1CamelFileModelMarshaller extends BaseModelMarshaller {
         super(desc, FILE_NAMESPACE_V1);
 
         registerBinding(V1CamelFileBindingModel.FILE, new ModelCreator<V1CamelFileBindingModel>() {
+            @Override
+            public V1CamelFileBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelFileBindingModel(config, descriptor);
+            }
+        });
+        registerBinding(Constants.FILE_NAMESPACE_V1_0, V1CamelFileBindingModel.FILE, new ModelCreator<V1CamelFileBindingModel>() {
             @Override
             public V1CamelFileBindingModel create(Configuration config, Descriptor descriptor) {
                 return new V1CamelFileBindingModel(config, descriptor);

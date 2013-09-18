@@ -25,7 +25,12 @@ public interface BPMComponentImplementationModel extends KnowledgeComponentImple
     /**
      * The "bpm" namespace.
      */
-    public static final String DEFAULT_NAMESPACE = "urn:switchyard-component-bpm:config:1.0";
+    public static final String DEFAULT_NAMESPACE = "urn:switchyard-component-bpm:config:1.1";
+
+    /**
+     * The 1.0 "bpm" namespace.
+     */
+    public static final String NAMESPACE_1_0 = "urn:switchyard-component-bpm:config:1.0";
 
     /**
      * The "bpm" implementation type.

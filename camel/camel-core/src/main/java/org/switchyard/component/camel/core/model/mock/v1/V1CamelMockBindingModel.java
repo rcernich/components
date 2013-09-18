@@ -46,7 +46,16 @@ public class V1CamelMockBindingModel  extends V1BaseCamelBindingModel
      * Create a new CamelMockBindingModel.
      */
     public V1CamelMockBindingModel() {
-        super(MOCK, CORE_NAMESPACE_V1);
+        this(CORE_NAMESPACE_V1);
+    }
+
+    /**
+     * Create a new CamelMockBindingModel.
+     * 
+     * @param namespace the namespace for this mock binding
+     */
+    public V1CamelMockBindingModel(String namespace) {
+        super(MOCK, namespace);
 
         setModelChildrenOrder(NAME, REPORT_GROUP);
     }

@@ -37,6 +37,7 @@ public class BPELSayHelloTest {
     		_testKit = new SwitchYardTestKit(this);
     		_testKit.start();
     	} catch(Exception e) {
+            e.printStackTrace();
     		fail("Unable to initialize testkit");
     	}
     }

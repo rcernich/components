@@ -13,6 +13,7 @@
  */
 package org.switchyard.component.camel.atom.model.v1;
 
+import org.switchyard.component.camel.atom.model.Constants;
 import org.switchyard.component.camel.common.marshaller.BaseModelMarshaller;
 import org.switchyard.component.camel.common.marshaller.ModelCreator;
 import org.switchyard.config.Configuration;
@@ -34,6 +35,12 @@ public class V1CamelAtomModelMarshaller extends BaseModelMarshaller {
         super(desc, ATOM_NAMESPACE_V1);
 
         registerBinding(V1CamelAtomBindingModel.ATOM, new ModelCreator<V1CamelAtomBindingModel>() {
+            @Override
+            public V1CamelAtomBindingModel create(Configuration config, Descriptor descriptor) {
+                return new V1CamelAtomBindingModel(config, descriptor);
+            }
+        });
+        registerBinding(Constants.ATOM_NAMESPACE_V1_0, V1CamelAtomBindingModel.ATOM, new ModelCreator<V1CamelAtomBindingModel>() {
             @Override
             public V1CamelAtomBindingModel create(Configuration config, Descriptor descriptor) {
                 return new V1CamelAtomBindingModel(config, descriptor);

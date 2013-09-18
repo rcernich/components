@@ -17,6 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 import org.apache.camel.component.netty.NettyEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;
+import org.switchyard.component.camel.netty.model.Constants;
 
 /**
  * Test for {@link V1CamelNettyBindingModel}.
@@ -53,15 +54,21 @@ public class V1CamelNettyTcpBindingModelTest extends V1BaseCamelServiceBindingMo
         "keepAlive=false&keyStoreFormat=PCKS12&passphrase=camelRider&keyStoreFile=#ks&trustStoreFile=#ts&" +
         "ssl=true&sslHandler=#myCustomHandler&securityProvider=BC";
 
-    public V1CamelNettyTcpBindingModelTest() {
-        super(NettyEndpoint.class, CAMEL_XML);
+    private final String _namespaceUri;
 
+    public V1CamelNettyTcpBindingModelTest() {
+        this(CAMEL_XML, Constants.NETTY_NAMESPACE_V1);
+    }
+
+    protected V1CamelNettyTcpBindingModelTest(String testConfigPath, String namespaceUri) {
+        super(NettyEndpoint.class, testConfigPath);
+        _namespaceUri = namespaceUri;
         setSkipCamelEndpointTesting(true);
     }
 
     @Override
     protected V1CamelNettyTcpBindingModel createTestModel() {
-        return ((V1CamelNettyTcpBindingModel) new V1CamelNettyTcpBindingModel()
+        return ((V1CamelNettyTcpBindingModel) new V1CamelNettyTcpBindingModel(_namespaceUri)
             .setHost(HOST)
             .setPort(PORT)
             .setReceiveBufferSize(RECEIVE_BUFFER_SIZE)
@@ -80,8 +87,7 @@ public class V1CamelNettyTcpBindingModelTest extends V1BaseCamelServiceBindingMo
             .setDisconnect(DISCONNECT))
             .setTextline(TEXTLINE)
             .setTcpNoDelay(TCP_NO_DELAY)
-            .setKeepAlive(KEEP_ALIVE)
-            ;
+            .setKeepAlive(KEEP_ALIVE);
     }
 
     @Override

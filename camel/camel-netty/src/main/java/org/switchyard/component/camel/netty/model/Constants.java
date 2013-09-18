@@ -19,8 +19,13 @@ package org.switchyard.component.camel.netty.model;
 public interface Constants {
 
     /**
-     * Netty v1 namespace.
+     * Netty v1.1 namespace.
      */
-    String NETTY_NAMESPACE_V1 = "urn:switchyard-component-camel-netty:config:1.0";
+    String NETTY_NAMESPACE_V1 = "urn:switchyard-component-camel-netty:config:1.1";
+
+    /**
+     * Netty v1.0 namespace.
+     */
+    String NETTY_NAMESPACE_V1_0 = "urn:switchyard-component-camel-netty:config:1.0";
 
 }
