@@ -53,7 +53,8 @@
                 <configuration>
                     <instructions>
                         <Provide-Capability>
-                            org.ops4j.pax.cdi.extension; extension=switchyard-component-bean; version:Version=${version;====;${replace;${project.version};-;.}}
+                            org.ops4j.pax.cdi.extension; extension=switchyard-component-bean; version:Version=${switchyard.osgi.version},
+                            org.switchyard.component.bean; version:Version=${switchyard.osgi.version}
                         </Provide-Capability>
                         <Require-Capability>
                             osgi.extender; filter:="(osgi.extender=pax.cdi)"

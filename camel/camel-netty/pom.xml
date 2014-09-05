@@ -33,6 +33,9 @@
             org.jboss.netty.*;version="[3,4)",
             *
         </switchyard.osgi.import>
+        <switchyard.osgi.provide.capability>
+            org.switchyard.component.camel.netty;version:Version=${switchyard.osgi.version}
+        </switchyard.osgi.provide.capability>
     </properties>
     <dependencies>
         <!--

@@ -33,6 +33,9 @@
             org.switchyard.config.model;${switchyard.osgi.import.switchyard.version},
             *
         </switchyard.osgi.import>
+        <switchyard.osgi.provide.capability>
+            org.switchyard.component.soap;version:Version=${switchyard.osgi.version}
+        </switchyard.osgi.provide.capability>
     </properties>
     <build>
         <plugins>

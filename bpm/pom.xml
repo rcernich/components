@@ -43,6 +43,9 @@
             org.kie.api,
             org.kie.internalapi
         </switchyard.osgi.require.bundle>
+        <switchyard.osgi.provide.capability>
+            org.switchyard.component.bpm;version:Version=${switchyard.osgi.version}
+        </switchyard.osgi.provide.capability>
     </properties>
     <build>
         <plugins>

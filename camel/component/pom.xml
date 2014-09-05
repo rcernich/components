@@ -38,6 +38,9 @@
             org.springframework.transaction*;resolution:=optional,
             *
         </switchyard.osgi.import>
+        <switchyard.osgi.provide.capability>
+            org.switchyard.component.camel.route;version:Version=${switchyard.osgi.version}
+        </switchyard.osgi.provide.capability>
     </properties>
     <dependencies>
         <dependency>

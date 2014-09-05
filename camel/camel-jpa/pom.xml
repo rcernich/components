@@ -32,6 +32,9 @@
             org.switchyard.config.model;org.switchyard.*;${switchyard.osgi.import.switchyard.version},
             *
         </switchyard.osgi.import>
+        <switchyard.osgi.provide.capability>
+            org.switchyard.component.camel.jpa;version:Version=${switchyard.osgi.version}
+        </switchyard.osgi.provide.capability>
     </properties>
     <dependencies>
         <!--
